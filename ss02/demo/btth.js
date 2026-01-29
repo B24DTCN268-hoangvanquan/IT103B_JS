@@ -1,0 +1,59 @@
+let username = prompt("Nhập tên người dùng: ");
+let role = prompt("Nhập vai trò (admin / student / guest) ");
+let balance = +prompt("Nhập số dư tài khoản thẻ:");
+let cardStatus = prompt("Nhập trạng thái thẻ (true nếu hoạt động):");
+let overdueDays = +prompt("Nhập số ngày quá hạn trả sách:");
+
+let roleMessage = "";
+switch (role) {
+  case "admin":
+    roleMessage = "Chào Admin, bạn có toàn quyền hệ thống";
+    break;
+  case "student":
+    roleMessage = "Chào sinh viên, bạn có thể mượn sách";
+    break;
+  case "guest":
+    roleMessage = "Chào khách, bạn chỉ có thể đọc tại chỗ";
+    break;
+  default:
+    roleMessage = "Lỗi: Vai trò không hợp lệ!";
+}
+let borrowResult = "";
+let reason = "";
+if (
+  username &&
+  (role === "student" || role === "admin") &&
+  balance > 0 &&
+  cardStatus
+) {
+  borrowResult = "ĐƯỢC PHÉP MƯỢN SÁCH";
+} else {
+  borrowResult = "YÊU CẦU BỊ TỪ CHỐI";
+  if (!username) reason += "Tên người dùng trống. ";
+  if (!(role === "student" || role === "admin"))
+    reason += "Vai trò không hợp lệ. ";
+  if (balance <= 0) reason += "Số dư không đủ. ";
+  if (!cardStatus) reason += "Thẻ bị khóa. ";
+}
+
+let fine = 0;
+let returnMessage = "";
+if (overdueDays <= 0) {
+  returnMessage = "Cảm ơn bạn đã trả đúng hạn";
+} else if (overdueDays <= 5) {
+  fine = overdueDays * 5000;
+  returnMessage = `Quá hạn ${overdueDays} ngày`;
+} else if (overdueDays <= 10) {
+  fine = overdueDays * 10000;
+  returnMessage = `Quá hạn ${overdueDays} ngày`;
+} else {
+  fine = 200000;
+  returnMessage = `Quá hạn ${overdueDays} ngày - TÀI KHOẢN BỊ KHÓA`;
+}
+
+console.log(`--- HỆ THỐNG MƯỢN TRẢ ---
+Người dùng: ${username ? username.toUpperCase() : "Không xác định"}
+Quyền hạn: ${roleMessage}
+Kết quả mượn: ${borrowResult}${reason ? " (" + reason.trim() + ")" : ""}
+Tình trạng trả sách: ${returnMessage}
+Tiền phạt: ${fine} VNĐ`);
