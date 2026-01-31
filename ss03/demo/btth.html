@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>btth</title>
+  </head>
+  <body>
+    <script>
+      let attempts = 0;
+      let isLoggedIn = false;
+
+      while (attempts < 3) {
+        let password = prompt("Nhập mật khẩu:");
+        if (password === "admin123") {
+          console.log("Đăng nhập thành công");
+          isLoggedIn = true;
+          break;
+        } else {
+          console.log("Sai mật khẩu. Vui lòng thử lại.");
+          attempts++;
+        }
+      }
+
+      if (!isLoggedIn) {
+        console.log("Hệ thống bị khóa");
+      } else {
+        while (true) {
+          let choice = prompt(
+            "Chọn chức năng:\n1. Nhập lô sách mới\n2. Vẽ sơ đồ kệ sách\n3. Thoát",
+          );
+
+          switch (choice) {
+            case "1":
+              let total = 0;
+              let quantity = parseInt(
+                prompt("Bạn muốn nhập bao nhiêu cuốn sách?"),
+              );
+
+              for (let i = 1; i <= quantity; i++) {
+                let price = parseFloat(
+                  prompt(`Nhập giá tiền cho cuốn sách thứ ${i}:`),
+                );
+                if (price <= 0) {
+                  console.log("Giá không hợp lệ, bỏ qua cuốn này.");
+                  continue;
+                }
+                total += price;
+              }
+
+              console.log(`Tổng giá trị nhập kho đợt này là: ${total}`);
+              break;
+
+            case "2":
+              for (let i = 1; i <= 3; i++) {
+                for (let j = 1; j <= 5; j++) {
+                  if (i === 2 && j === 3) {
+                    console.log("Khu vực 2 - Kệ 3 (Đang sửa chữa)");
+                    continue;
+                  }
+                  console.log(`Khu vực ${i} - Kệ ${j}`);
+                }
+              }
+              break;
+
+            case "3":
+              console.log("Hẹn gặp lại!");
+              break;
+
+            default:
+              console.log("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+              continue;
+          }
+
+          if (choice === "3") break;
+        }
+      }
+    </script>
+  </body>
+</html>
