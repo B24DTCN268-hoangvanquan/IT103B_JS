@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cau1</title>
+  </head>
+  <body>
+    <script>
+      let n = 30;
+      if (n % 2 === 0) {
+        console.log(`Số ${n} là số chẵn`);
+      } else {
+        console.log(`Số ${n} là số lẻ`);
+      }
+
+      if (n > 0) {
+        console.log(`${n} là số dương`);
+      } else if (n < 0) {
+        console.log(`${n} là số âm`);
+      } else {
+        console.log(`${n} bằng 0`);
+      }
+
+      if (n > 0) {
+        console.log(`Dãy sô tuừ 1 đến ${n}:`);
+        for (let i = 1; i <= n; i++) {
+          console.log(i);
+        }
+      } else {
+        console.log("Giá trị n không hợp lệ để tạo dãy số");
+      }
+    </script>
+  </body>
+</html>

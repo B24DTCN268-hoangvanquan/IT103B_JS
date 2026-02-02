@@ -38,19 +38,19 @@ while (true) {
     let content = prompt("Nội dung ngắn gọn:");
 
     if (type === 1 && level === 3) {
-      console.log("→ Chuyển ngay lãnh đạo - Khiếu nại nghiêm trọng");
+      console.log("Chuyển ngay lãnh đạo - Khiếu nại nghiêm trọng");
       seriousComplaints++;
     } else if (type === 1 && level === 2) {
-      console.log("→ Ghi nhận, sẽ xử lý trong ngày - Khiếu nại trung bình");
+      console.log("Ghi nhận, sẽ xử lý trong ngày - Khiếu nại trung bình");
       mediumComplaints++;
     } else if (type === 1 && level === 1) {
-      console.log("→ Xử lý ngay tại quầy - Khiếu nại nhẹ");
+      console.log(" Xử lý ngay tại quầy - Khiếu nại nhẹ");
       lightComplaints++;
     } else if (type === 2) {
-      console.log("→ Cảm ơn! Đề xuất đã được ghi nhận");
+      console.log(" Cảm ơn! Đề xuất đã được ghi nhận");
       suggestions++;
     } else if (type === 3) {
-      console.log("→ Cảm ơn bạn đã phản hồi tích cực!");
+      console.log(" Cảm ơn bạn đã phản hồi tích cực!");
       positiveFeedback++;
     }
 

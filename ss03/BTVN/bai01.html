@@ -1,52 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>bai01</title>
   </head>
   <body>
-    <script>
-      let totalBorrows = +prompt("Hôm nay có bao nhiêu lượt mượn sách?");
-      while (isNaN(totalBorrows) || totalBorrows <= 0) {
-        totalBorrows = +prompt("Vui lòng nhập số nguyên dương hợp lệ:");
-      }
-      let count = 0;
-      for (let i = 1; i <= totalBorrows; i++) {
-        console.log(" Lượt mượn thứ " + i);
-        let borrowerName = prompt("Nhập tên người mượn:");
-        let bookName = prompt("Nhập tên sách:");
-        let borrowDays = parseInt(prompt("Nhập số ngày mượn (1 - 30):"));
-        while (isNaN(borrowDays) || borrowDays < 1 || borrowDays > 30) {
-          borrowDays = parseInt(
-            prompt("Số ngày không hợp lệ! Nhập lại (1 - 30):"),
-          );
-        }
-
-        if (borrowDays > 14) {
-          console.log(
-            borrowerName +
-              ' mượn sách "' +
-              bookName +
-              '" trong ' +
-              borrowDays +
-              " ngày → Cảnh báo: Thời gian mượn vượt quy định (tối đa 14 ngày)",
-          );
-        } else {
-          console.log(
-            borrowerName +
-              ' mượn sách "' +
-              bookName +
-              '" trong ' +
-              borrowDays +
-              " ngày → Mượn thành công",
-          );
-        }
-        count++;
-      }
-
-      console.log("===== THỐNG KÊ CUỐI NGÀY =====");
-      console.log("Tổng số lượt mượn sách: " + count);
-    </script>
+    <script src="./bai01.js"></script>
   </body>
 </html>
