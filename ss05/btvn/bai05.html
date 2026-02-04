@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let books = ["Nha Gia Kim", "Dac Nhan Tam", "Tuan Lam Viec 4 Gio"];
+
+      let choice;
+
+      do {
+        choice = prompt(
+          `--- THƯ VIỆN KHOA HỌC ---
+
+1. Xem danh sách
+2. Nhập sách mới
+3. Mượn sách (Xóa)
+4. Sửa tên sách
+5. Sắp xếp kệ
+0. Thoát
+
+Bạn chọn:`,
+        );
+
+        switch (choice) {
+          case "1":
+            if (books.length === 0) {
+              alert("Kho sách đang trống!");
+            } else {
+              let list = "";
+              for (let i = 0; i < books.length; i++) {
+                list += i + 1 + ". " + books[i] + "\n";
+              }
+              alert(`Danh sách hiện tại (${books.length} cuốn):\n\n` + list);
+            }
+            break;
+
+          case "2":
+            let newBook = prompt("Nhập tên sách mới:");
+            if (newBook) {
+              books.push(newBook);
+              alert("Đã thêm thành công!");
+            }
+            break;
+
+          case "3":
+            let borrowBook = prompt("Nhập tên sách muốn mượn:");
+            let indexBorrow = books.indexOf(borrowBook);
+
+            if (indexBorrow === -1) {
+              alert("Lỗi: Không có sách này trong kho!");
+            } else {
+              books.splice(indexBorrow, 1);
+              alert(`Đã cho mượn sách '${borrowBook}'`);
+            }
+            break;
+
+          case "4":
+            let oldName = prompt("Nhập tên sách cần sửa:");
+            let indexEdit = books.indexOf(oldName);
+
+            if (indexEdit === -1) {
+              alert("Không tìm thấy sách!");
+            } else {
+              let newName = prompt("Nhập tên mới:");
+              if (newName) {
+                books[indexEdit] = newName;
+                alert("Cập nhật thành công!");
+              }
+            }
+            break;
+
+          case "5":
+            books.sort();
+            let sortedList = books.map((b, i) => i + 1 + ". " + b).join("\n");
+            alert("Danh sách sau khi sắp xếp:\n\n" + sortedList);
+            break;
+
+          case "0":
+            alert("Kết thúc chương trình!");
+            break;
+
+          default:
+            alert("Lựa chọn không hợp lệ!");
+        }
+      } while (choice !== "0");
+    </script>
+  </body>
+</html>

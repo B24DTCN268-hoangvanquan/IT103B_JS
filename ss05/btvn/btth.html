@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let books = ["Nha Gia Kim", "Dac Nhan Tam", "Tuan Lam Viec 4 Gio"];
+      let choice;
+      do {
+        choice = +prompt(`
+        1. Xem danh sách 
+        2. Nhập sách mới 
+        3. Mượn sách (xoá)
+        4. Sửa tên sách
+        5. Sắp xếp kệ
+        0. Thoát
+        Mời bạn nhập lựa chọn:
+        `);
+        switch (choice) {
+          case 1:
+            if (books.length === 0) {
+              alert("Kho sách đang trống!");
+            } else {
+              let list = "";
+              for (let i = 0; i < books.length; i++) {
+                list += i + 1 + ". " + books[i] + "\n";
+              }
+              alert(`Danh sách hiện tại \n\n` + list);
+            }
+            break;
+          case 2:
+            let number = prompt("Nhập tên sách mới");
+
+            break;
+          case 3:
+            break;
+          case 4:
+            break;
+          default:
+            break;
+        }
+      } while (choice);
+    </script>
+  </body>
+</html>

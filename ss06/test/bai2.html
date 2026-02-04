@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bai2</title>
+  </head>
+  <body>
+    <script>
+      let array = [100, 200, 300, 400];
+      console.log("Giá trị các phần tử :");
+      for (let value of array) {
+        console.log(value);
+      }
+      console.log("Vị trí các phần tử :");
+      for (let index in array) {
+        console.log(index);
+      }
+      let sum = 0;
+      for (let i = 0; i < array.length; i++) {
+        if (i % 2 === 0) {
+          sum += array[i];
+        }
+      }
+      console.log("Tổng các phần tử ở vị trí chẵn:", sum);
+    </script>
+  </body>
+</html>

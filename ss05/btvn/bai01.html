@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bai01</title>
+  </head>
+  <body>
+    <script>
+      let arrayBooks = [];
+      let total = +prompt("Bạn muốn trả bao nhiêu cuốn sách?");
+
+      if (total <= 0) {
+        console.log("Số lượng không hợp lệ!");
+      } else {
+        for (let i = 0; i < total; i++) {
+          let bookName = prompt("Nhập tên cuốn sách thứ " + (i + 1));
+          arrayBooks.push(bookName);
+        }
+
+        console.log("Tổng số sách đã được trả: " + arrayBooks.length);
+        console.log("Danh sách sách đã trả:");
+        for (let i = 0; i < arrayBooks.length; i++) {
+          console.log(i + 1 + ". " + arrayBooks[i]);
+        }
+      }
+    </script>
+  </body>
+</html>

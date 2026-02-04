@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bai1</title>
+  </head>
+  <body>
+    <script>
+      let arraystr = "Quý, Nam, Lan, Hùng, Nam";
+
+      let students = arraystr.split(", ");
+      console.log("Mảng students: ", students);
+      students.reverse();
+      console.log("Mảng sau khi đảo ngược:", students);
+
+      if (students.includes("Lan")) {
+        console.log("Tên Lan tồn tại trong mảng");
+      } else {
+        console.log("Tên Lan không tồn tại trong mảng");
+      }
+      let indexNam = students.indexOf("Nam");
+      console.log("Vị trí đầu tiên của Nam:", indexNam);
+    </script>
+  </body>
+</html>

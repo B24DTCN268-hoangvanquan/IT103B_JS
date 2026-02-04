@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let usernameCorrect = "admin";
+      let passwordCorrect = "12345";
+      let attempts = 0;
+      let loggedIn = false;
+
+      while (attempts < 3) {
+        let user = prompt("Nhập tài khoản:");
+        let pass = prompt("Nhập mật khẩu:");
+
+        if (user === usernameCorrect && pass === passwordCorrect) {
+          loggedIn = true;
+          break;
+        } else {
+          attempts++;
+          alert("Sai thông tin! Còn " + (3 - attempts) + " lần thử.");
+        }
+      }
+
+      if (!loggedIn) {
+        alert("Tài khoản đã bị khóa!");
+      } else {
+        let libraries = ["Toán", "Văn", "Anh"];
+        let choice;
+
+        do {
+          choice = prompt(
+            `===== QUẢN LÝ THƯ VIỆN =====
+            1. Nhập thêm lô sách mới
+            2. Hiển thị danh sách sách
+            3. Tìm kiếm sách
+            4. Cập nhật tên sách
+            5. Đảo ngược thứ tự kệ
+            6. Nhập kho từ nguồn khác
+            7. Thoát`,
+          );
+
+          switch (choice) {
+            // ===== 1. NHẬP LÔ SÁCH =====
+            case "1":
+              let input = prompt("Nhập tên các sách, cách nhau bởi dấu phẩy:");
+              let newBooks = input.split(",");
+              for (let i = 0; i < newBooks.length; i++) {
+                libraries.push(newBooks[i].trim());
+              }
+              console.log("Đã thêm " + newBooks.length + " sách.");
+              break;
+
+            // ===== 2. HIỂN THỊ =====
+            case "2":
+              console.log("Danh sách sách:");
+              for (let i = 0; i < libraries.length; i++) {
+                console.log(i + 1 + ". " + libraries[i]);
+              }
+              break;
+
+            // ===== 3. TÌM KIẾM =====
+            case "3":
+              let search = prompt("Nhập tên sách cần tìm:");
+              if (libraries.includes(search)) {
+                console.log(
+                  "Sách " +
+                    search +
+                    " được tìm thấy tại vị trí " +
+                    libraries.indexOf(search),
+                );
+              } else {
+                console.log("Không tìm thấy");
+              }
+              break;
+
+            // ===== 4. CẬP NHẬT =====
+            case "4":
+              let oldName = prompt("Nhập tên sách cần sửa:");
+              let indexEdit = libraries.indexOf(oldName);
+              if (indexEdit !== -1) {
+                let newName = prompt("Nhập tên mới:");
+                libraries[indexEdit] = newName;
+                console.log("Cập nhật thành công!");
+              } else {
+                console.log("Sách không tồn tại.");
+              }
+              break;
+
+            // ===== 5. ĐẢO NGƯỢC =====
+            case "5":
+              libraries.reverse();
+              console.log("Danh sách sau khi đảo:");
+              for (let i in libraries) {
+                console.log("Index " + i + ": " + libraries[i]);
+              }
+              break;
+
+            // ===== 6. GỘP KHO =====
+            case "6":
+              let branchBooks = ["Sách Kỹ Năng", "Truyện Tranh"];
+              libraries = libraries.concat(branchBooks);
+              console.log("Đã gộp kho sách thành công");
+              break;
+
+            // ===== 7. THOÁT =====
+            case "7":
+              console.log("Hẹn gặp lại!");
+              break;
+
+            default:
+              console.log("Lựa chọn không hợp lệ!");
+          }
+        } while (choice !== "7");
+      }
+    </script>
+  </body>
+</html>
