@@ -3,7 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>bai03</title>
   </head>
-  <body></body>
+  <body>
+    <script>
+      let booksId = [];
+      let booksName = [];
+      let quantity = [];
+
+      let n = +prompt("Có bao nhiêu loại sách cần kiểm tra bổ sung hôm nay? ");
+
+      for (let i = 0; i < n; i++) {
+        let id;
+        do {
+          id = prompt(`Nhập mã sách thứ ${i + 1}: `);
+        } while (!id || id.trim() === "");
+
+        let name;
+        do {
+          name = prompt(`Nhập tên sách thứ ${i + 1}: `);
+        } while (!name || name.trim() === "");
+
+        let q;
+        do {
+          q = +prompt(`Nhập số lượng tồn kho hiện tại của sách thứ ${i + 1}: `);
+        } while (isNaN(q) || q < 0);
+
+        booksId.push(id);
+        booksName.push(name);
+        quantity.push(q);
+      }
+
+      console.log("Tổng số loại sách đang kiểm tra:", booksId.length);
+
+      let count = 0;
+      for (let i = 0; i < quantity.length; i++) {
+        if (quantity[i] <= 5) {
+          count++;
+        }
+      }
+      console.log("Số lượng sách tồn kho ≤ 5 bản (cần bổ sung):", count);
+
+      console.log("Danh sách mã sách đã hết hàng:");
+      for (let i = 0; i < quantity.length; i++) {
+        if (quantity[i] === 0) {
+          console.log("-", booksId[i]);
+        }
+      }
+
+      console.log("Danh sách chi tiết:");
+      for (let i = 0; i < booksId.length; i++) {
+        console.log(
+          `${i + 1}. Mã sách: ${booksId[i]} | Tên sách: ${booksName[i]} | Tồn kho: ${quantity[i]}`,
+        );
+      }
+    </script>
+  </body>
 </html>

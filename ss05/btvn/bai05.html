@@ -7,86 +7,74 @@
   </head>
   <body>
     <script>
-      let books = ["Nha Gia Kim", "Dac Nhan Tam", "Tuan Lam Viec 4 Gio"];
+      let booksId = [];
+      let booksName = [];
+      let inventoryQuantity = [];
+      let booksCategory = [];
 
-      let choice;
+      function isDuplicateId(id) {
+        return booksId.includes(id);
+      }
 
-      do {
-        choice = prompt(
-          `--- THƯ VIỆN KHOA HỌC ---
+      let n = +prompt("Có bao nhiêu loại sách cần nhập thông tin hôm nay? ");
 
-1. Xem danh sách
-2. Nhập sách mới
-3. Mượn sách (Xóa)
-4. Sửa tên sách
-5. Sắp xếp kệ
-0. Thoát
+      for (let i = 0; i < n; i++) {
+        let id;
+        do {
+          id = prompt(`Nhập mã sách thứ ${i + 1}:`);
+        } while (!id || id.trim() === "" || isDuplicateId(id));
 
-Bạn chọn:`,
-        );
+        let name;
+        do {
+          name = prompt(`Nhập tên sách thứ ${i + 1}:`);
+        } while (!name || name.trim() === "");
 
-        switch (choice) {
-          case "1":
-            if (books.length === 0) {
-              alert("Kho sách đang trống!");
-            } else {
-              let list = "";
-              for (let i = 0; i < books.length; i++) {
-                list += i + 1 + ". " + books[i] + "\n";
-              }
-              alert(`Danh sách hiện tại (${books.length} cuốn):\n\n` + list);
-            }
-            break;
+        let category;
+        do {
+          category = prompt(
+            `Nhập các thể loại của sách thứ ${i + 1} (cách nhau bởi dấu phẩy):`,
+          );
+        } while (!category || category.trim() === "");
 
-          case "2":
-            let newBook = prompt("Nhập tên sách mới:");
-            if (newBook) {
-              books.push(newBook);
-              alert("Đã thêm thành công!");
-            }
-            break;
+        let quantity;
+        do {
+          quantity = +prompt(`Nhập số lượng tồn kho của sách thứ ${i + 1}:`);
+        } while (isNaN(quantity) || quantity < 0);
 
-          case "3":
-            let borrowBook = prompt("Nhập tên sách muốn mượn:");
-            let indexBorrow = books.indexOf(borrowBook);
+        booksId.push(id);
+        booksName.push(name);
+        booksCategory.push(category);
+        inventoryQuantity.push(quantity);
+      }
 
-            if (indexBorrow === -1) {
-              alert("Lỗi: Không có sách này trong kho!");
-            } else {
-              books.splice(indexBorrow, 1);
-              alert(`Đã cho mượn sách '${borrowBook}'`);
-            }
-            break;
-
-          case "4":
-            let oldName = prompt("Nhập tên sách cần sửa:");
-            let indexEdit = books.indexOf(oldName);
-
-            if (indexEdit === -1) {
-              alert("Không tìm thấy sách!");
-            } else {
-              let newName = prompt("Nhập tên mới:");
-              if (newName) {
-                books[indexEdit] = newName;
-                alert("Cập nhật thành công!");
-              }
-            }
-            break;
-
-          case "5":
-            books.sort();
-            let sortedList = books.map((b, i) => i + 1 + ". " + b).join("\n");
-            alert("Danh sách sau khi sắp xếp:\n\n" + sortedList);
-            break;
-
-          case "0":
-            alert("Kết thúc chương trình!");
-            break;
-
-          default:
-            alert("Lựa chọn không hợp lệ!");
+      let countProgramming = 0;
+      for (let cat of booksCategory) {
+        if (cat.toLowerCase().includes("lập trình")) {
+          countProgramming++;
         }
-      } while (choice !== "0");
+      }
+      console.log("Tổng số sách thuộc thể loại 'Lập trình':", countProgramming);
+
+      console.log(
+        "Danh sách mã sách thuộc cả hai thể loại 'JavaScript' và 'Web':",
+      );
+      for (let i = 0; i < booksCategory.length; i++) {
+        let catLower = booksCategory[i].toLowerCase();
+        if (catLower.includes("javascript") && catLower.includes("web")) {
+          console.log(booksId[i]);
+        }
+      }
+
+      let minIndex = 0;
+      for (let i = 1; i < inventoryQuantity.length; i++) {
+        if (inventoryQuantity[i] < inventoryQuantity[minIndex]) {
+          minIndex = i;
+        }
+      }
+      console.log("Loại sách có số lượng tồn kho thấp nhất:");
+      console.log(
+        `Mã sách: ${booksId[minIndex]}, Tên sách: ${booksName[minIndex]}, Tồn kho: ${inventoryQuantity[minIndex]}`,
+      );
     </script>
   </body>
 </html>

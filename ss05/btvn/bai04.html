@@ -7,114 +7,121 @@
   </head>
   <body>
     <script>
-      let usernameCorrect = "admin";
-      let passwordCorrect = "12345";
-      let attempts = 0;
-      let loggedIn = false;
+      let booksId = [];
+      let booksName = [];
+      let bookStatus = [];
 
-      while (attempts < 3) {
-        let user = prompt("Nhập tài khoản:");
-        let pass = prompt("Nhập mật khẩu:");
+      const statusMap = {
+        1: "Hỏng nhẹ",
+        2: "Hỏng nặng",
+        3: "Cần sửa gấp",
+        4: "Đã sửa xong",
+        5: "Loại bỏ",
+      };
 
-        if (user === usernameCorrect && pass === passwordCorrect) {
-          loggedIn = true;
-          break;
-        } else {
-          attempts++;
-          alert("Sai thông tin! Còn " + (3 - attempts) + " lần thử.");
+      let n = +prompt(
+        "Có bao nhiêu cuốn sách cần kiểm tra tình trạng hôm nay? ",
+      );
+
+      for (let i = 0; i < n; i++) {
+        let id;
+        do {
+          id = prompt(`Nhập mã sách thứ ${i + 1}:`);
+        } while (!id || id.trim() === "");
+
+        let name;
+        do {
+          name = prompt(`Nhập tên sách thứ ${i + 1}:`);
+        } while (!name || name.trim() === "");
+
+        let statusChoice;
+        do {
+          statusChoice = +prompt(
+            `Nhập tình trạng ban đầu (1: Hỏng nhẹ, 2: Hỏng nặng, 3: Cần sửa gấp):`,
+          );
+        } while (![1, 2, 3].includes(statusChoice));
+
+        booksId.push(id);
+        booksName.push(name);
+        bookStatus.push(statusMap[statusChoice]);
+      }
+
+      function printList() {
+        console.log("Danh sách hiện tại:");
+        for (let i = 0; i < booksId.length; i++) {
+          console.log(
+            `${i + 1}. Mã sách: ${booksId[i]} | Tên sách: ${booksName[i]} | Tình trạng: ${bookStatus[i]}`,
+          );
         }
       }
 
-      if (!loggedIn) {
-        alert("Tài khoản đã bị khóa!");
-      } else {
-        let libraries = ["Toán", "Văn", "Anh"];
-        let choice;
+      printList();
 
-        do {
-          choice = prompt(
-            `===== QUẢN LÝ THƯ VIỆN =====
-            1. Nhập thêm lô sách mới
-            2. Hiển thị danh sách sách
-            3. Tìm kiếm sách
-            4. Cập nhật tên sách
-            5. Đảo ngược thứ tự kệ
-            6. Nhập kho từ nguồn khác
-            7. Thoát`,
-          );
-
-          switch (choice) {
-            // ===== 1. NHẬP LÔ SÁCH =====
-            case "1":
-              let input = prompt("Nhập tên các sách, cách nhau bởi dấu phẩy:");
-              let newBooks = input.split(",");
-              for (let i = 0; i < newBooks.length; i++) {
-                libraries.push(newBooks[i].trim());
-              }
-              console.log("Đã thêm " + newBooks.length + " sách.");
+      let choice;
+      do {
+        choice = +prompt(
+          "Bạn muốn làm gì? (1: Sửa tình trạng, 2: Loại bỏ, 0: Kết thúc)",
+        );
+        if (choice === 1) {
+          let idEdit = prompt("Nhập mã sách cần sửa:");
+          let foundIndex = -1;
+          for (let i = 0; i < booksId.length; i++) {
+            if (booksId[i] === idEdit) {
+              foundIndex = i;
               break;
-
-            // ===== 2. HIỂN THỊ =====
-            case "2":
-              console.log("Danh sách sách:");
-              for (let i = 0; i < libraries.length; i++) {
-                console.log(i + 1 + ". " + libraries[i]);
-              }
-              break;
-
-            // ===== 3. TÌM KIẾM =====
-            case "3":
-              let search = prompt("Nhập tên sách cần tìm:");
-              if (libraries.includes(search)) {
-                console.log(
-                  "Sách " +
-                    search +
-                    " được tìm thấy tại vị trí " +
-                    libraries.indexOf(search),
-                );
-              } else {
-                console.log("Không tìm thấy");
-              }
-              break;
-
-            // ===== 4. CẬP NHẬT =====
-            case "4":
-              let oldName = prompt("Nhập tên sách cần sửa:");
-              let indexEdit = libraries.indexOf(oldName);
-              if (indexEdit !== -1) {
-                let newName = prompt("Nhập tên mới:");
-                libraries[indexEdit] = newName;
-                console.log("Cập nhật thành công!");
-              } else {
-                console.log("Sách không tồn tại.");
-              }
-              break;
-
-            // ===== 5. ĐẢO NGƯỢC =====
-            case "5":
-              libraries.reverse();
-              console.log("Danh sách sau khi đảo:");
-              for (let i in libraries) {
-                console.log("Index " + i + ": " + libraries[i]);
-              }
-              break;
-
-            // ===== 6. GỘP KHO =====
-            case "6":
-              let branchBooks = ["Sách Kỹ Năng", "Truyện Tranh"];
-              libraries = libraries.concat(branchBooks);
-              console.log("Đã gộp kho sách thành công");
-              break;
-
-            // ===== 7. THOÁT =====
-            case "7":
-              console.log("Hẹn gặp lại!");
-              break;
-
-            default:
-              console.log("Lựa chọn không hợp lệ!");
+            }
           }
-        } while (choice !== "7");
+          if (foundIndex !== -1) {
+            let newStatus;
+            do {
+              newStatus = +prompt(
+                "Chọn tình trạng mới (1: Hỏng nhẹ, 2: Hỏng nặng, 3: Cần sửa gấp, 4: Đã sửa xong, 5: Loại bỏ):",
+              );
+            } while (![1, 2, 3, 4, 5].includes(newStatus));
+            bookStatus[foundIndex] = statusMap[newStatus];
+            console.log("Đã cập nhật tình trạng sách.");
+          } else {
+            console.log("Không tìm thấy mã sách.");
+          }
+          printList();
+        } else if (choice === 2) {
+          let idDelete = prompt("Nhập mã sách cần xóa:");
+          let foundIndex = -1;
+          for (let i = 0; i < booksId.length; i++) {
+            if (booksId[i] === idDelete) {
+              foundIndex = i;
+              break;
+            }
+          }
+          if (foundIndex !== -1) {
+            booksId.splice(foundIndex, 1);
+            booksName.splice(foundIndex, 1);
+            bookStatus.splice(foundIndex, 1);
+            console.log("Đã xóa sách khỏi danh sách.");
+          } else {
+            console.log("Không tìm thấy mã sách.");
+          }
+          printList();
+        }
+      } while (choice !== 0);
+
+      console.log("=== BÁO CÁO CUỐI ===");
+      console.log("Tổng số sách còn lại:", booksId.length);
+
+      let countRepaired = 0;
+      let countRemoved = 0;
+      for (let status of bookStatus) {
+        if (status === "Đã sửa xong") countRepaired++;
+        if (status === "Loại bỏ") countRemoved++;
+      }
+      console.log("Số sách đã sửa xong:", countRepaired);
+      console.log("Số sách loại bỏ:", countRemoved);
+
+      if (booksId.length > 0) {
+        console.log("Danh sách các sách còn lại:");
+        printList();
+      } else {
+        console.log("Không còn sách nào trong danh sách.");
       }
     </script>
   </body>
