@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team</title>
+  </head>
+  <body>
+    <script>
+      let ids = [];
+      let posArr = [];
+
+      function printRoster() {
+        console.log(`\nĐội bóng hiện tại (${ids.length} cầu thủ):`);
+        for (let i = 0; i < ids.length; i++) {
+          console.log(`${i + 1}. ${ids[i]} - ${posArr[i]}`);
+        }
+      }
+
+      function findByPos(pos) {
+        let idxs = [];
+        for (let i = 0; i < posArr.length; i++) {
+          if (posArr[i] === pos) {
+            idxs.push(i);
+          }
+        }
+        return idxs;
+      }
+
+      function getPosName(ch) {
+        switch (ch) {
+          case 1:
+            return "Thủ môn";
+          case 2:
+            return "Hậu vệ";
+          case 3:
+            return "Tiền vệ";
+          case 4:
+            return "Tiền đạo";
+          default:
+            return "Không xác định";
+        }
+      }
+
+      let nP = 2;
+
+      let inp = [
+        { id: "P001", p: 1 },
+        { id: "P002", p: 2 },
+      ];
+
+      for (let i = 0; i < nP; i++) {
+        let pl = inp[i];
+
+        if (ids.includes(pl.id)) {
+          console.log("Mã cầu thủ đã tồn tại, vui lòng nhập lại!");
+        } else {
+          ids.push(pl.id);
+          posArr.push(getPosName(pl.p));
+        }
+      }
+
+      printRoster();
+
+      let ch = 2;
+      let posName = getPosName(ch);
+      let idxs = findByPos(posName);
+
+      console.log(`\nSố cầu thủ ở vị trí ${posName}: ${idxs.length}`);
+      console.log(`Các chỉ số cầu thủ ở vị trí ${posName}: ${idxs.join(", ")}`);
+    </script>
+  </body>
+</html>

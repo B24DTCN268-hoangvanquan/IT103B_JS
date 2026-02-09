@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quản lý đội bóng</title>
+  </head>
+  <body>
+    <script>
+      let players = [];
+      let goals = [];
+      function addPlayer(name, goal) {
+        players.push(name);
+        goals.push(goal);
+        console.log(`=> Đã thêm ${name} thành công.`);
+      }
+
+      function showSquad() {
+        if (players.length === 0) {
+          console.log("Đội bóng chưa có cầu thủ nào.");
+          return;
+        }
+
+        console.log("\n--- DANH SÁCH ĐỘI HÌNH ---");
+        for (let i = 0; i < players.length; i++) {
+          console.log(`${i + 1}. ${players[i]} - ${goals[i]} bàn`);
+        }
+      }
+
+      const getTotalGoals = function () {
+        let sum = 0;
+        for (let i = 0; i < goals.length; i++) {
+          sum += goals[i];
+        }
+        return sum;
+      };
+
+      function findMostGoals(goalsArray) {
+        if (goalsArray.length === 0) return 0;
+
+        let max = goalsArray[0];
+        for (let i = 1; i < goalsArray.length; i++) {
+          if (goalsArray[i] > max) {
+            max = goalsArray[i];
+          }
+        }
+        return max;
+      }
+
+      function findTopScorer() {
+        if (players.length === 0) return "Chưa có cầu thủ";
+
+        let maxGoals = findMostGoals(goals);
+        let index = goals.indexOf(maxGoals);
+        return players[index];
+      }
+
+      function main() {
+        while (true) {
+          let choice = prompt(
+            `--- QUẢN LÝ ĐỘI BÓNG ---
+            1. Nhập cầu thủ mới
+            2. Xem danh sách đội hình
+            3. Xem thành tích toàn đội
+            4. Tìm Vua phá lưới
+            0. Thoát`,
+          );
+
+          if (choice === "1") {
+            let name = prompt("Nhập tên cầu thủ:");
+            let goal = parseInt(prompt("Nhập số bàn thắng:"));
+
+            if (name && !isNaN(goal)) {
+              addPlayer(name, goal);
+            } else {
+              console.log("Dữ liệu không hợp lệ!");
+            }
+          } else if (choice === "2") {
+            showSquad();
+          } else if (choice === "3") {
+            let total = getTotalGoals();
+            console.log(`=> Tổng số bàn thắng của cả đội là: ${total} bàn.`);
+          } else if (choice === "4") {
+            let maxGoals = findMostGoals(goals);
+            let topPlayer = findTopScorer();
+            console.log(`=> Vua phá lưới: ${topPlayer} với ${maxGoals} bàn.`);
+          } else if (choice === "0") {
+            console.log("Thoát chương trình. Tạm biệt!");
+            break;
+          } else {
+            console.log("Lựa chọn không hợp lệ!");
+          }
+        }
+      }
+
+      main();
+    </script>
+  </body>
+</html>

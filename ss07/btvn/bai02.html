@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team</title>
+  </head>
+  <body>
+    <script>
+      let ids = ["P001", "P002", "P003"];
+      let names = ["Nguyen Van A", "Tran Van B", "Le Van C"];
+      let jerseys = [10, 5, 7];
+
+      function printRoster() {
+        console.log("\nDanh sách cầu thủ hiện tại:");
+        for (let i = 0; i < ids.length; i++) {
+          console.log(
+            `${i + 1}. ${ids[i]} - ${names[i]} - Số áo: ${jerseys[i]}`,
+          );
+        }
+      }
+
+      function updatePlayer(id, newN, newJ) {
+        let idx = ids.indexOf(id);
+        if (idx !== -1) {
+          names[idx] = newN;
+          jerseys[idx] = newJ;
+          return true;
+        }
+        return false;
+      }
+
+      let inId = "P001";
+      let nName = "Nguyen Van D";
+      let nJer = 11;
+
+      let ok = updatePlayer(inId, nName, nJer);
+
+      if (ok) {
+        console.log(`\nCập nhật thành công cho cầu thủ ${inId}!`);
+        printRoster();
+      } else {
+        console.log("\nKhông tìm thấy cầu thủ với mã này!");
+      }
+    </script>
+  </body>
+</html>

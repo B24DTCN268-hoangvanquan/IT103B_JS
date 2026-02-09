@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team</title>
+  </head>
+  <body>
+    <script>
+      let pList = [
+        "P001-Nguyễn Văn A-Thủ môn",
+        "P002-Trần Thị B-Hậu vệ",
+        "P003-Lê Văn C-Tiền đạo",
+        "P004-Phạm Văn D-Tiền vệ",
+        "P005-Ngô Văn E-Thủ môn",
+      ];
+
+      function printRoster() {
+        console.log("\nDanh sách cầu thủ:");
+        for (let i = 0; i < pList.length; i++) {
+          let parts = pList[i].split("-");
+          let id = parts[0];
+          let n = parts[1];
+          let pos = parts[2];
+          console.log(`${i + 1}. ${id} | ${n} | ${pos}`);
+        }
+      }
+
+      function countByPos(list) {
+        let cnt = {};
+        for (let p of list) {
+          let pos = p.split("-")[2];
+          cnt[pos] ? cnt[pos]++ : (cnt[pos] = 1);
+        }
+        return cnt;
+      }
+
+      function hasGK(list) {
+        for (let p of list) {
+          let pos = p.split("-")[2];
+          if (pos === "Thủ môn") return true;
+        }
+        return false;
+      }
+
+      printRoster();
+
+      let cnt = countByPos(pList);
+      console.log("\nSố lượng cầu thủ theo vị trí:");
+      for (let pos in cnt) {
+        console.log(`${pos}: ${cnt[pos]}`);
+      }
+
+      console.log("\nĐội có thủ môn không?", hasGK(pList));
+    </script>
+  </body>
+</html>

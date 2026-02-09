@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team</title>
+  </head>
+  <body>
+    <script>
+      let pList = [
+        "P001-Nguyễn Văn A-Thủ môn",
+        "P002-Trần Thị B-Hậu vệ",
+        "P003-Lê Văn C-Tiền đạo",
+        "P004-Phạm Văn D-Tiền vệ",
+        "P005-Ngô Văn E-Thủ môn",
+        "P006-Nguyễn Thị F-Tiền đạo",
+      ];
+
+      function getPos(list) {
+        let posArr = [];
+        for (let p of list) {
+          let pos = p.split("-")[2];
+          if (!posArr.includes(pos)) {
+            posArr.push(pos);
+          }
+        }
+        return posArr;
+      }
+
+      function getLongestName(list) {
+        let longName = "";
+        for (let p of list) {
+          let n = p.split("-")[1];
+          if (n.length > longName.length) {
+            longName = n;
+          }
+        }
+        return longName;
+      }
+
+      function countByLetter(list, l) {
+        let c = 0;
+        let lowL = l.toLowerCase();
+        for (let p of list) {
+          let n = p.split("-")[1];
+          if (n.charAt(0).toLowerCase() === lowL) {
+            c++;
+          }
+        }
+        return c;
+      }
+
+      console.log("Vị trí:", getPos(pList));
+      console.log("Tên dài nhất:", getLongestName(pList));
+      console.log("Tên bắt đầu bằng 'N':", countByLetter(pList, "N"));
+    </script>
+  </body>
+</html>

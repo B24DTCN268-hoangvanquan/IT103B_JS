@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team</title>
+  </head>
+  <body>
+    <script>
+      let pList = [];
+
+      function printRoster() {
+        console.log("\nDanh sách cầu thủ hiện tại:");
+        for (let i = 0; i < pList.length; i++) {
+          let parts = pList[i].split("-");
+          let id = parts[0];
+          let n = parts[1];
+          let pos = parts[2];
+          console.log(`${i + 1}. ${id} - ${n} - ${pos}`);
+        }
+      }
+
+      function addP(id, n, posCh) {
+        for (let i = 0; i < pList.length; i++) {
+          if (pList[i].startsWith(id + "-")) {
+            console.log("Mã cầu thủ đã tồn tại, vui lòng nhập lại!");
+            return false;
+          }
+        }
+
+        let posName;
+        switch (posCh) {
+          case 1:
+            posName = "Thủ môn";
+            break;
+          case 2:
+            posName = "Hậu vệ";
+            break;
+          case 3:
+            posName = "Tiền vệ";
+            break;
+          case 4:
+            posName = "Tiền đạo";
+            break;
+          default:
+            posName = "Không xác định";
+        }
+
+        let pInfo = `${id}-${n}-${posName}`;
+        pList.push(pInfo);
+        return true;
+      }
+
+      let nP = 3;
+
+      let inp = [
+        { id: "P001", n: "Nguyễn Văn A", pos: 1 },
+        { id: "P002", n: "Trần Thị B", pos: 2 },
+        { id: "P003", n: "Lê Văn C", pos: 4 },
+      ];
+
+      for (let i = 0; i < nP; i++) {
+        addP(inp[i].id, inp[i].n, inp[i].pos);
+      }
+
+      printRoster();
+    </script>
+  </body>
+</html>
