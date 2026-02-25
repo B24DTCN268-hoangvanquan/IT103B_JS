@@ -15,7 +15,17 @@
         "Đơn hàng E",
       ];
       let revenues = [1500, 2800, 1200, -500, 3200];
-      let orderReports = orders.forEach((e) => alert(`${e[0]} USD`));
+
+      let orderReports = orders.map((order, index) => {
+        return `${order} mang về ${revenues[index]} USD`;
+      });
+
+      console.log(orderReports);
+      let validRevenue = revenues
+        .filter((revenue) => revenue > 0)
+        .reduce((sum, revenue) => sum + revenue, 0);
+
+      console.log("Tổng doanh thu hợp lệ:", validRevenue);
     </script>
   </body>
 </html>
