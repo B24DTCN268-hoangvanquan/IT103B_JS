@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>btth</title>
+  </head>
+  <body>
+    <script>
+      const squad = [
+        ["Nguyen Van A", 10, "FW"],
+        ["Tran Van B", 5, "MF"],
+        ["Le Van C", 2, "DF"],
+        ["Pham Van D", 12, "FW"],
+        ["Hoang Van E", 0, "GK"],
+        ["Dang Van F", 7, "MF"],
+      ];
+      let choice;
+      do {
+        choice = +prompt(`
+        --- QUẢN LÝ ĐỘI BÓNG ---
+        1. Xem danh sách
+        2. Tìm kiếm (Find)
+        3. Lọc vị trí (Filter)
+        4. Tổng bàn thắng (Reduce)
+        5. Kiểm tra hiệu suất (Some/Every)
+        0. Thoát
+        Mời bạn nhập lựa chọn:
+        `);
+        switch (choice) {
+          case 1:
+            squad.forEach((p) => {
+              console.log(squad);
+            });
+            break;
+          case 2:
+            const name = prompt("Nhập tên cầu thủ cần tìm:");
+            const found = squad.find((p) => p[0] === name);
+            if (found) {
+              alert(
+                `Tìm thấy: ${found[0]} - ${found[1]} bàn - Vị trí: ${found[2]}`,
+              );
+            } else {
+              alert("Không tìm thấy cầu thủ!");
+            }
+            break;
+
+          case 3:
+            const pos = prompt("Nhập vị trí muốn lọc (FW/MF/DF/GK):");
+            const result = squad.filter((p) => p[2] === pos);
+            if (result.length > 0) {
+              let resu = "=> KẾT QUẢ LỌC:\n";
+              result.forEach((p) => {
+                resu += `- ${p[0]} (${p[1]} bàn)\n`;
+              });
+              alert(resu);
+            } else {
+              alert("Không có cầu thủ ở vị trí này!");
+            }
+
+            break;
+          case 4:
+            break;
+          case 5:
+            break;
+          case 0:
+            alert("Thoát");
+            break;
+
+          default:
+            alert("Lựa chọn không hợp lệ!");
+            break;
+        }
+      } while (choice !== 0);
+    </script>
+  </body>
+</html>
