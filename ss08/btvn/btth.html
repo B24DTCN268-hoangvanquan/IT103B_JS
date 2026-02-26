@@ -15,6 +15,7 @@
         ["Hoang Van E", 0, "GK"],
         ["Dang Van F", 7, "MF"],
       ];
+
       let choice;
       do {
         choice = +prompt(`
@@ -27,12 +28,12 @@
         0. Thoát
         Mời bạn nhập lựa chọn:
         `);
+
         switch (choice) {
           case 1:
-            squad.forEach((p) => {
-              console.log(squad);
-            });
+            squad.forEach((p) => alert(`${p[0]} (${p[2]}): ${p[1]} bàn thắng`));
             break;
+
           case 2:
             const name = prompt("Nhập tên cầu thủ cần tìm:");
             const found = squad.find((p) => p[0] === name);
@@ -49,20 +50,28 @@
             const pos = prompt("Nhập vị trí muốn lọc (FW/MF/DF/GK):");
             const result = squad.filter((p) => p[2] === pos);
             if (result.length > 0) {
-              let resu = "=> KẾT QUẢ LỌC:\n";
+              let msg = "=> KẾT QUẢ LỌC:\n";
               result.forEach((p) => {
-                resu += `- ${p[0]} (${p[1]} bàn)\n`;
+                msg += `- ${p[0]} (${p[1]} bàn)\n`;
               });
-              alert(resu);
+              alert(msg);
             } else {
               alert("Không có cầu thủ ở vị trí này!");
             }
+            break;
 
-            break;
           case 4:
+            const total = squad.reduce((sum, p) => sum + p[1], 0);
+            alert(`=> Tổng số bàn thắng toàn đội: ${total} bàn`);
             break;
+
           case 5:
+            const goalof = squad.some((p) => p[1] === 0);
+            const allGoal = squad.every((p) => p[1] > 0);
+            if (goalof) alert("Có cầu thủ chưa ghi bàn");
+            if (allGoal) alert("Tất cả cầu thủ đều đã ghi bàn");
             break;
+
           case 0:
             alert("Thoát");
             break;
