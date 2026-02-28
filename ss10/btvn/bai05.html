@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function generatePlayerSeasonReport(playerName, team) {
+        const player = team.find((p) => p.name === playerName);
+        if (!player) return "không tìm tháy câù thủ";
+
+        let totalMatches = 0,
+          totalGoals = 0,
+          totalAssists = 0,
+          totalYellowCards = 0,
+          bestSeason = null;
+
+        for (const [season, data] of Object.entries(player.seasons)) {
+          totalMatches += data.matches;
+          totalGoals += data.goals;
+          totalAssists += data.assists;
+          totalYellowCards += data.yellowCards;
+
+          if (
+            !bestSeason ||
+            data.goals > bestSeason.goals ||
+            (data.goals === bestSeason.goals &&
+              data.assists > bestSeason.assists)
+          ) {
+            bestSeason = { season, goals: data.goals, assists: data.assists };
+          }
+        }
+
+        return {
+          name: player.name,
+          position: player.position,
+          nationality: player.nationality,
+          careerStats: {
+            totalMatches,
+            totalGoals,
+            totalAssists,
+            totalYellowCards,
+            averageGoalsPerMatch: +(totalGoals / totalMatches).toFixed(2),
+            averageAssistsPerMatch: +(totalAssists / totalMatches).toFixed(2),
+            bestSeason,
+          },
+        };
+      }
+    </script>
+  </body>
+</html>

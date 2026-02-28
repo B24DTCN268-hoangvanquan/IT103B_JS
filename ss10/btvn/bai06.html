@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function generateRankingReport(minMatches, players) {
+        const ranked = players
+          .filter((p) => p.matches >= minMatches)
+          .map((p, i) => {
+            const performance = +((p.goals + p.assists) / p.matches).toFixed(2);
+            const efficiency = +(
+              performance -
+              (p.yellowCards / p.matches) * 10
+            ).toFixed(2);
+
+            return { ...p, performance, efficiency, i };
+          })
+          .sort(
+            (a, b) =>
+              b.efficiency - a.efficiency ||
+              b.performance - a.performance ||
+              b.goals - a.goals ||
+              a.i - b.i,
+          );
+
+        console.log(`XẾP HẠNG (>= ${minMatches} trận)`);
+
+        ranked.forEach((p, idx) =>
+          console.log(
+            `${idx + 1}. ${p.name} - Efficiency: ${p.efficiency} | Performance: ${p.performance} | Goals: ${p.goals}`,
+          ),
+        );
+        console.log(`\nTổng số: ${ranked.length}`);
+
+        if (ranked.length) {
+          console.log(`Xuất sắc nhất: ${ranked[0].name}`);
+          const avgTop3 = +(
+            ranked.slice(0, 3).reduce((s, p) => s + p.efficiency, 0) /
+            Math.min(3, ranked.length)
+          ).toFixed(2);
+
+          console.log(`Trung bình efficiency top 3: ${avgTop3}`);
+        }
+      }
+    </script>
+  </body>
+</html>
